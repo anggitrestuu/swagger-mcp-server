@@ -74,7 +74,7 @@ export class OptimizedSwaggerParserTool {
   });
 
   /**
-   * Register tool on the MCP server
+   * Register tool on the MCP server (registers both optimized and lite versions)
    */
   register(server: McpServer) {
     // 注册完整版解析工具
@@ -82,10 +82,10 @@ export class OptimizedSwaggerParserTool {
       this.name,
       this.description,
       this.schema.shape,
-      async ({ 
-        url, 
-        headers = {}, 
-        includeSchemas = false, 
+      async ({
+        url,
+        headers = {},
+        includeSchemas = false,
         includeDetails = false,
         skipValidation = true,
         useCache = true,
@@ -94,10 +94,10 @@ export class OptimizedSwaggerParserTool {
         filterTag,
         pathPrefix
       }) => {
-        return await this.execute({ 
-          url, 
-          headers, 
-          includeSchemas, 
+        return await this.execute({
+          url,
+          headers,
+          includeSchemas,
           includeDetails,
           skipValidation,
           useCache,
@@ -108,16 +108,23 @@ export class OptimizedSwaggerParserTool {
         });
       }
     );
-    
+
     // 注册轻量版解析工具
+    this.registerLiteOnly(server);
+  }
+
+  /**
+   * Register only the lite version tool (parse-swagger-lite)
+   */
+  registerLiteOnly(server: McpServer) {
     server.tool(
       LITE_SWAGGER_PARSER_TOOL_NAME,
       LITE_SWAGGER_PARSER_TOOL_DESCRIPTION,
       this.schema.shape,
-      async ({ 
-        url, 
-        headers = {}, 
-        includeSchemas = false, 
+      async ({
+        url,
+        headers = {},
+        includeSchemas = false,
         includeDetails = false,
         skipValidation = true,
         useCache = true,
@@ -125,10 +132,10 @@ export class OptimizedSwaggerParserTool {
         filterTag,
         pathPrefix
       }) => {
-        return await this.execute({ 
-          url, 
-          headers, 
-          includeSchemas, 
+        return await this.execute({
+          url,
+          headers,
+          includeSchemas,
           includeDetails,
           skipValidation,
           useCache,
@@ -139,6 +146,7 @@ export class OptimizedSwaggerParserTool {
         });
       }
     );
+    console.error(`✅ 已注册工具: ${LITE_SWAGGER_PARSER_TOOL_NAME}`);
   }
 
   /**
