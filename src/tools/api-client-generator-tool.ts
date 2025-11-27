@@ -139,7 +139,7 @@ export class ApiClientGeneratorTool {
       }
     );
     
-    console.log(`✅ 已注册API客户端生成器工具: ${this.name}, ${this.optimizedName}`);
+    console.error(`✅ 已注册API客户端生成器工具: ${this.name}, ${this.optimizedName}`);
   }
 
   /**
@@ -147,7 +147,7 @@ export class ApiClientGeneratorTool {
    */
   async execute(params: z.infer<typeof this.optimizedSchema>) {
     try {
-      console.log(`[ApiClientGeneratorTool] 开始生成API客户端: ${params.swaggerUrl}`);
+      console.error(`[ApiClientGeneratorTool] 开始生成API客户端: ${params.swaggerUrl}`);
       
       // 创建生成器实例
       const generator = new ApiClientGenerator();
@@ -166,7 +166,7 @@ export class ApiClientGeneratorTool {
       
       // 处理结果
       if (result.success) {
-        console.log(`[ApiClientGeneratorTool] 客户端生成成功，生成了 ${result.files.length} 个文件`);
+        console.error(`[ApiClientGeneratorTool] 客户端生成成功，生成了 ${result.files.length} 个文件`);
         
         return {
           content: [

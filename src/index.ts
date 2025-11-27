@@ -28,7 +28,7 @@ export interface SwaggerMcpConfig {
 export async function main(configPath = './swagger-mcp-config.json'): Promise<void> {
   try {
     // 读取配置文件
-    console.log(`加载配置文件: ${configPath}`);
+    console.error(`加载配置文件: ${configPath}`);
     const configContent = await fs.readFile(configPath, 'utf8');
     const config: SwaggerMcpConfig = JSON.parse(configContent);
     
@@ -66,7 +66,7 @@ export async function createMcpServer(config: {
   // 仅使用stdio传输
   const transport = new StdioServerTransport();
   server.connect(transport);
-  console.log(`🚀 MCP服务器已启动，使用stdio传输`);
+  console.error(`🚀 MCP服务器已启动，使用stdio传输`);
 }
 
 // 如果直接运行此文件，则启动main函数

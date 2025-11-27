@@ -5,11 +5,13 @@
 import fs from 'fs/promises';
 import path from 'path';
 
-// 使用Node环境变量__dirname获取当前目录
-// 注意：在ESM模块中，需要使用以下技巧模拟__dirname
-// 这里为了兼容，使用process.cwd()获取当前工作目录
-const PROJECT_ROOT = process.cwd();
-const TEMPLATES_ROOT = path.join(PROJECT_ROOT, 'src/templates');
+// 使用__dirname获取当前文件所在目录，然后定位到templates目录
+// 编译后文件在 dist/templates/template-manager.js
+// 需要定位到 src/templates (与dist同级的src目录下)
+const CURRENT_DIR = __dirname;
+// 从 dist/templates 回到项目根目录，再进入 src/templates
+const PROJECT_ROOT = path.resolve(CURRENT_DIR, '..', '..');
+const TEMPLATES_ROOT = path.join(PROJECT_ROOT, 'src', 'templates');
 
 // 内置模板目录
 const BUILT_IN_TEMPLATES_DIR = path.join(TEMPLATES_ROOT, 'built-in');
@@ -96,7 +98,7 @@ export class TemplateManager {
       await this.loadCustomTemplates();
       
       this.initialized = true;
-      console.log(`🎯 模板管理器初始化完成, 内置模板: ${this.builtInTemplates.length}, 自定义模板: ${this.customTemplates.length}`);
+      console.error(`🎯 模板管理器初始化完成, 内置模板: ${this.builtInTemplates.length}, 自定义模板: ${this.customTemplates.length}`);
     } catch (error) {
       console.error('模板管理器初始化失败:', error);
       throw error;

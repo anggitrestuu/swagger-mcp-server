@@ -65,7 +65,7 @@ export class SwaggerParserTool {
     includeDetails = false
   }: z.infer<typeof this.schema>) {
     try {
-      console.log(`[SwaggerParserTool] 解析Swagger文档: ${url}`);
+      console.error(`[SwaggerParserTool] 解析Swagger文档: ${url}`);
       
       // 创建解析器实例
       const parser = new OptimizedSwaggerApiParser({ 
@@ -119,7 +119,7 @@ export class SwaggerParserTool {
         result.schemas = await parser.getAllSchemas();
       }
       
-      console.log(`[SwaggerParserTool] 解析完成，找到 ${operations.length} 个API操作`);
+      console.error(`[SwaggerParserTool] 解析完成，找到 ${operations.length} 个API操作`);
       
       // 返回结果
       return {

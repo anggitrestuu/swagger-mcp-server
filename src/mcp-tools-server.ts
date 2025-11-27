@@ -27,7 +27,7 @@ export async function startMcpToolsServer(options: {
     const version = options.version || '1.0.0';
     const transportType = options.transportType || 'stdio';
     
-    console.log(`启动 ${name} v${version} 使用 ${transportType} 传输...`);
+    console.error(`启动 ${name} v${version} 使用 ${transportType} 传输...`);
     
     // 创建服务器
     const server = new McpServer({
@@ -41,20 +41,20 @@ export async function startMcpToolsServer(options: {
     // 设置传输层 - 只使用 stdio
     const transport = new StdioServerTransport();
     server.connect(transport);
-    console.log(`🚀 MCP工具服务器已启动，使用stdio传输`);
+    console.error(`🚀 MCP工具服务器已启动，使用stdio传输`);
     
     /* 暂时不支持 HTTP
     if (transportType === 'stdio') {
       const transport = new StdioServerTransport();
       server.connect(transport);
-      console.log(`🚀 MCP工具服务器已启动，使用stdio传输`);
+      console.error(`🚀 MCP工具服务器已启动，使用stdio传输`);
     } else if (transportType === 'http') {
       const transport = new HttpServerTransport({
         port,
         endpoint: '/mcp',
       });
       server.connect(transport);
-      console.log(`🚀 MCP工具服务器已启动，使用HTTP传输，端口: ${port}`);
+      console.error(`🚀 MCP工具服务器已启动，使用HTTP传输，端口: ${port}`);
     }
     */
   } catch (error) {
@@ -77,10 +77,10 @@ function registerAllTools(server: McpServer): void {
   
   for (const tool of tools) {
     tool.register(server);
-    console.log(`✅ 已注册工具: ${tool.name}`);
+    console.error(`✅ 已注册工具: ${tool.name}`);
   }
   
-  console.log(`共注册了 ${tools.length} 个工具`);
+  console.error(`共注册了 ${tools.length} 个工具`);
 }
 
 // 如果直接运行此文件，则启动服务器

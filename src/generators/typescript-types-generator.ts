@@ -147,11 +147,11 @@ export class TypeScriptTypesGenerator extends BaseCodeGenerator<TypeScriptTypesG
       
       // 定义进度回调
       const progressCallback = options.progressCallback || ((progress: number, message: string) => {
-        console.log(`[TypeScriptTypesGenerator] 进度: ${Math.round(progress * 100)}%, ${message}`);
+        console.error(`[TypeScriptTypesGenerator] 进度: ${Math.round(progress * 100)}%, ${message}`);
       });
       
       // 解析Swagger文档
-      console.log(`[TypeScriptTypesGenerator] 解析Swagger文档: ${options.swaggerUrl}`);
+      console.error(`[TypeScriptTypesGenerator] 解析Swagger文档: ${options.swaggerUrl}`);
       
       // 使用优化的Swagger解析器
       const parser = new OptimizedSwaggerApiParser({
@@ -178,11 +178,11 @@ export class TypeScriptTypesGenerator extends BaseCodeGenerator<TypeScriptTypesG
         };
       }
       
-      console.log(`[TypeScriptTypesGenerator] 找到 ${Object.keys(schemas).length} 个模式定义`);
+      console.error(`[TypeScriptTypesGenerator] 找到 ${Object.keys(schemas).length} 个模式定义`);
       
       // 过滤模式
       const filteredSchemas = this.filterSchemas(schemas, options.includeSchemas, options.excludeSchemas);
-      console.log(`[TypeScriptTypesGenerator] 过滤后剩余 ${Object.keys(filteredSchemas).length} 个模式定义`);
+      console.error(`[TypeScriptTypesGenerator] 过滤后剩余 ${Object.keys(filteredSchemas).length} 个模式定义`);
       
       // 生成类型定义
       const generatedFiles: string[] = [];
@@ -216,7 +216,7 @@ export class TypeScriptTypesGenerator extends BaseCodeGenerator<TypeScriptTypesG
           await fs.writeFile(filePath, typeDefinition, 'utf8');
           generatedFiles.push(filePath);
           
-          console.log(`[TypeScriptTypesGenerator] 已生成: ${filePath}`);
+          console.error(`[TypeScriptTypesGenerator] 已生成: ${filePath}`);
         } catch (err) {
           warnings.push(`无法处理模式 ${schemaName}: ${err instanceof Error ? err.message : String(err)}`);
         }
@@ -230,7 +230,7 @@ export class TypeScriptTypesGenerator extends BaseCodeGenerator<TypeScriptTypesG
         await fs.writeFile(indexPath, indexContent, 'utf8');
         generatedFiles.push(indexPath);
         
-        console.log(`[TypeScriptTypesGenerator] 已生成索引文件: ${indexPath}`);
+        console.error(`[TypeScriptTypesGenerator] 已生成索引文件: ${indexPath}`);
       }
       
       return {

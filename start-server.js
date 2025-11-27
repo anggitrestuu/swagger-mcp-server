@@ -6,8 +6,9 @@
 const path = require('path');
 const fs = require('fs');
 
-// 检查默认配置文件是否存在，如不存在则创建
-const defaultConfigPath = path.join(process.cwd(), 'swagger-mcp-config.json');
+// 使用__dirname获取脚本所在目录，而非process.cwd()
+// 这样无论从哪里调用，都能正确定位配置文件
+const defaultConfigPath = path.join(__dirname, 'swagger-mcp-config.json');
 if (!fs.existsSync(defaultConfigPath)) {
   // 创建默认配置
   const defaultConfig = {
@@ -22,13 +23,13 @@ if (!fs.existsSync(defaultConfigPath)) {
     'utf8'
   );
   
-  console.log(`📝 已创建默认配置文件: ${defaultConfigPath}`);
+  console.error(`📝 已创建默认配置文件: ${defaultConfigPath}`);
 }
 
 // 启动服务器
 try {
   const configPath = process.argv[2] || defaultConfigPath;
-  console.log(`🚀 正在启动Swagger MCP服务器，使用配置文件: ${configPath}`);
+  console.error(`🚀 正在启动Swagger MCP服务器，使用配置文件: ${configPath}`);
   
   // 导入并启动主函数
   require('./dist/index.js').main(configPath);

@@ -95,7 +95,7 @@ export class TemplateManagerTool {
       }
     );
     
-    console.log(`✅ 已注册模板管理器工具: ${TEMPLATE_LIST_TOOL_NAME}, ${TEMPLATE_GET_TOOL_NAME}, ${TEMPLATE_SAVE_TOOL_NAME}, ${TEMPLATE_DELETE_TOOL_NAME}`);
+    console.error(`✅ 已注册模板管理器工具: ${TEMPLATE_LIST_TOOL_NAME}, ${TEMPLATE_GET_TOOL_NAME}, ${TEMPLATE_SAVE_TOOL_NAME}, ${TEMPLATE_DELETE_TOOL_NAME}`);
   }
   
   /**

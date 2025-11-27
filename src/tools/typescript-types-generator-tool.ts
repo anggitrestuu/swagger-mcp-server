@@ -158,12 +158,12 @@ export class TypeScriptTypesGeneratorTool {
     const progressCallback = (newProgress: number, message: string) => {
       progress = newProgress;
       progressMessage = message;
-      console.log(`[Progress] ${Math.round(newProgress * 100)}%: ${message}`);
+      console.error(`[Progress] ${Math.round(newProgress * 100)}%: ${message}`);
     };
     
     try {
-      console.log(`[TypeScriptTypesGeneratorTool] 开始生成TypeScript类型: ${params.swaggerUrl}`);
-      console.log(`[TypeScriptTypesGeneratorTool] 缓存: ${params.useCache ? '启用' : '禁用'}, 懒加载: ${params.lazyLoading ? '启用' : '禁用'}`);
+      console.error(`[TypeScriptTypesGeneratorTool] 开始生成TypeScript类型: ${params.swaggerUrl}`);
+      console.error(`[TypeScriptTypesGeneratorTool] 缓存: ${params.useCache ? '启用' : '禁用'}, 懒加载: ${params.lazyLoading ? '启用' : '禁用'}`);
       
       // 创建生成器实例
       const generator = new TypeScriptTypesGenerator();
@@ -176,7 +176,7 @@ export class TypeScriptTypesGeneratorTool {
       
       // 处理结果
       if (result.success) {
-        console.log(`[TypeScriptTypesGeneratorTool] 类型生成成功，生成了 ${result.files.length} 个文件`);
+        console.error(`[TypeScriptTypesGeneratorTool] 类型生成成功，生成了 ${result.files.length} 个文件`);
         
         return {
           content: [

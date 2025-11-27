@@ -157,11 +157,11 @@ export class ApiClientGenerator extends BaseCodeGenerator<ApiClientGeneratorOpti
       await this.ensureDirectoryExists(outputDir);
       
       // 解析Swagger文档
-      console.log(`[ApiClientGenerator] 解析Swagger文档: ${options.swaggerUrl}`);
+      console.error(`[ApiClientGenerator] 解析Swagger文档: ${options.swaggerUrl}`);
       
       // 设置进度日志
       const logProgress = (progress: number, message: string) => {
-        console.log(`[ApiClientGenerator] 进度 ${Math.round(progress * 100)}%: ${message}`);
+        console.error(`[ApiClientGenerator] 进度 ${Math.round(progress * 100)}%: ${message}`);
         if (options.progressCallback) {
           options.progressCallback(progress, message);
         }

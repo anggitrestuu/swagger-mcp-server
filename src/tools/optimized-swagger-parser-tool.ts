@@ -165,12 +165,12 @@ export class OptimizedSwaggerParserTool {
     const progressCallback = (newProgress: number, message: string) => {
       progress = newProgress;
       progressMessage = message;
-      console.log(`[Progress] ${Math.round(newProgress * 100)}%: ${message}`);
+      console.error(`[Progress] ${Math.round(newProgress * 100)}%: ${message}`);
     };
     
     try {
-      console.log(`[OptimizedSwaggerParserTool] 解析Swagger文档: ${url}`);
-      console.log(`[OptimizedSwaggerParserTool] 缓存: ${useCache ? '启用' : '禁用'}, 懒加载: ${lazyLoading ? '启用' : '禁用'}`);
+      console.error(`[OptimizedSwaggerParserTool] 解析Swagger文档: ${url}`);
+      console.error(`[OptimizedSwaggerParserTool] 缓存: ${useCache ? '启用' : '禁用'}, 懒加载: ${lazyLoading ? '启用' : '禁用'}`);
       
       // 创建解析器实例
       const parser = new OptimizedSwaggerApiParser({
@@ -270,7 +270,7 @@ export class OptimizedSwaggerParserTool {
         }
       }
       
-      console.log(`[OptimizedSwaggerParserTool] 解析完成，找到 ${operations.length} 个API操作`);
+      console.error(`[OptimizedSwaggerParserTool] 解析完成，找到 ${operations.length} 个API操作`);
       
       // 返回结果
       return {
